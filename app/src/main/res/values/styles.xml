@@ -8,4 +8,36 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Mis estilos.. gracias Omar-->
+
+    <!-- buton -->
+    <style name="Button_login" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/color_buton_light</item>
+        <item name="colorButtonNormal">@color/color_buton_dark</item>
+    </style>
+
+    <!-- edit TExt-->
+    <style name="EditText" parent="AppTheme" >
+        <!-- cursor y línea normal-->
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <!-- cursor y línea con foco-->
+        <item name="colorControlActivated">@color/color_editeText_light</item>
+    </style>
+
+
+    <style name="AppTheme.FloatingLabel" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">@dimen/size</item>
+    </style>
+
+    <dimen name="size">14dp</dimen>
 </resources>

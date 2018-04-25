@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "6946858848",
+    "firebase_url": "https://ventasapplication.firebaseio.com",
+    "project_id": "ventasapplication",
+    "storage_bucket": "ventasapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:6946858848:android:274eaa9e4e29d51c",
+        "android_client_info": {
+          "package_name": "com.example.alumfial1.ventasaplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "6946858848-il8r8bhor4noo6oa8teq7neb0fbu2e4a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.alumfial1.ventasaplication",
+            "certificate_hash": "43c65b45afc1f41ce52f04fc8e4ff124f3e10d58"
+          }
+        },
+        {
+          "client_id": "6946858848-fl5bk2bd6ur3dcqt7cojpnkrc55pi3to.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCoeOl7pF_P27L7WmB3zEQk0WhKP5X6fEI"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "6946858848-fl5bk2bd6ur3dcqt7cojpnkrc55pi3to.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
