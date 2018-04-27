@@ -27,7 +27,7 @@ public class AnimationActivity extends AppCompatActivity {
                 // acciones que se ejecutan tras los milisegundos
                 animationView.loop(false);
                 animationView.pauseAnimation();
-                Intent intent=new Intent(AnimationActivity.this,MainActivity.class);
+                Intent intent=new Intent(AnimationActivity.this,NavigationActivity.class);
                 startActivity(intent);
             }
         }, 3000);

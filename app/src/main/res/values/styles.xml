@@ -26,7 +26,7 @@
     </style>
 
     <!-- edit TExt-->
-    <style name="EditText" parent="AppTheme" >
+    <style name="EditText" parent="AppTheme">
         <!-- cursor y línea normal-->
         <item name="colorControlNormal">@color/colorAccent</item>
         <!-- cursor y línea con foco-->
