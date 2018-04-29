@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.alumfial1.ventasaplication.Adaptador.RVAdapter;
 import com.example.alumfial1.ventasaplication.DAO.Producto;
 
 import java.util.HashMap;
@@ -23,7 +24,7 @@ public class ProductoFragment extends Fragment {
         //porque no?? getView()
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_producto, container, false);
-/*
+
         RecyclerView rv = (RecyclerView)view.findViewById(R.id.rv);
         //Si estás seguro que el tamaño del RecyclerView no se cambiará
         // , puedes añadirlo lo siguiente para mejorar el desempeño:
@@ -32,12 +33,17 @@ public class ProductoFragment extends Fragment {
         // hará que tu RecyclerView parezca una ListView.
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         rv.setLayoutManager(llm);
-*/
+
         producto=new Producto();
+        IniciarData();
+
+        RVAdapter adapter = new RVAdapter(producto.getListaProductos());
+        rv.setAdapter(adapter);
         return view;
     }
     public void IniciarData(){
         producto=new Producto();
+
         HashMap<String,Object> producto_map=new HashMap();
         producto_map.put("nombre", "yogurt Yaya de Coco");
         producto_map.put("imagen",R.drawable.yogurt_yaya_coco);
@@ -47,7 +53,7 @@ public class ProductoFragment extends Fragment {
         producto_map=new HashMap();
         producto_map.put("nombre", "yogurt Yaya de Fresa");
         producto_map.put("imagen",R.drawable.yogurt_yaya_fresa);
-        producto_map.put("stock", "25");
+        producto_map.put("stock", "30");
         producto.addProducto(producto_map);
     }
 

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Producto {
-    private ArrayList<HashMap> productos;
+    private ArrayList<HashMap<String,Object>> productos;
 /*    private String idd;
     private String name;
     private String foto;
@@ -17,11 +17,15 @@ public class Producto {
         this.stock = stock;
     }
 */
-    public void addProducto(HashMap objeto){
+
+    public Producto(){
+        productos=new ArrayList<HashMap<String,Object>>();
+    }
+    public void addProducto(HashMap<String,Object> objeto){
         productos.add(objeto);
     }
 
-    public ArrayList<HashMap> getListaProductos() {
+    public ArrayList<HashMap<String,Object>> getListaProductos() {
         return productos;
     }
 

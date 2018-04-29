@@ -30,8 +30,17 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ProductoViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ProductoViewHolder holder, int position) {
+    public void onAttachedToRecyclerView(RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+    }
 
+
+    //para especificar el contenido de cada elemento del RecyclerView.
+    @Override
+    public void onBindViewHolder(ProductoViewHolder holder, int position) {
+        holder.nombre.setText(listaProductos.get(position).get("nombre").toString());
+        holder.stock.setText(listaProductos.get(position).get("stock").toString());
+        holder.img.setImageResource((int)listaProductos.get(position).get("imagen"));
     }
 
     @Override
