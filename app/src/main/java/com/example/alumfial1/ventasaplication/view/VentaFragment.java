@@ -2,14 +2,18 @@ package com.example.alumfial1.ventasaplication.view;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alumfial1.ventasaplication.Adaptador.Venta_Adapter;
@@ -28,9 +32,12 @@ import java.util.HashMap;
 public class VentaFragment extends Fragment implements VentaInterface.View{
     private VentaInterface.Presenter presenter;
     private RecyclerView rv_catalogo;
+    private EditText et_cantidad;
+    private FloatingActionButton bn_floating_pre;
     private DatabaseReference mDatabase;
     private Venta_Adapter adapter;
     private ArrayList<HashMap<String,Object>> lista;
+    private ArrayList<HashMap<String,Object>> carrito;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,7 +47,9 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
 
         presenter=new VentaPresentator(this);
         lista= new ArrayList<HashMap<String,Object>>();
+        carrito=new ArrayList<HashMap<String,Object>>();
         rv_catalogo = (RecyclerView)view.findViewById(R.id.rv_venta);
+        bn_floating_pre=(FloatingActionButton)view.findViewById(R.id.fab);
 
         rv_catalogo.setItemAnimator(new DefaultItemAnimator());
         //Si rv_catalogo seguro que el tamaño del RecyclerView no se cambiará
@@ -54,10 +63,21 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
 
         adapter=new Venta_Adapter(lista);
 
+        bn_floating_pre.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Pre-venta", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CrearDialog(view);
+                String idd=lista.get(rv_catalogo.getChildAdapterPosition(view)).get("idd").toString();
+                String precio=lista.get(rv_catalogo.getChildAdapterPosition(view)).get("precio").toString();
+                String nombre=lista.get(rv_catalogo.getChildAdapterPosition(view)).get("nombre").toString();
+                CrearDialog(view,idd,precio,nombre);
             }
         });
 
@@ -71,6 +91,7 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 HashMap<String,Object> elemento=new HashMap<>();
 
+                elemento.put("idd",dataSnapshot.getKey());
                 elemento.put("nombre",dataSnapshot.child("nombre").getValue(String.class));
                 elemento.put("stock",dataSnapshot.child("stock").getValue(int.class));
                 elemento.put("precio",String.format("%.2f",1.4*dataSnapshot.child("precio").getValue(Double.class)));
@@ -109,19 +130,29 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
                 .show();
     }
 
-    public void CrearDialog(View view){
+    public void CrearDialog(final View view, final String idd, final String precio,final String nombre){
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getContext());
         // Get the layout inflater
         LayoutInflater inflater = getActivity().getLayoutInflater();
-
+        View mView=inflater.inflate(R.layout.dialog_cantidad, null);
+        et_cantidad=(EditText)mView.findViewById(R.id.et_diag_cantidad);
         // Inflate and set the layout for the dialog
         // Pass null as the parent view because its going in the dialog layout
-        alertDialogBuilder.setView(inflater.inflate(R.layout.dialog_cantidad, null))
+        alertDialogBuilder.setView(mView)
                 // Add action buttons
                 .setPositiveButton("Agregar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int id) {
-                        Toast.makeText(getActivity(),"Holaaaa",Toast.LENGTH_LONG).show();
+                        HashMap<String,Object> elemento_agregar=new HashMap<String,Object>();
+                        elemento_agregar.put("idd",idd);
+                        elemento_agregar.put("precio",precio);
+                        elemento_agregar.put("cantidad",et_cantidad.getText().toString());
+
+                        if(carrito.add(elemento_agregar)){
+                            Toast.makeText(getActivity()," Se Agrego "+elemento_agregar.get("cantidad")+" "+nombre
+                                    +" al carrito",Toast.LENGTH_LONG).show();
+                           view.findViewById(R.id.cardview_01).setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                        }
                     }
                 })
                 .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {

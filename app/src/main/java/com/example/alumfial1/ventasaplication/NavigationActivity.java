@@ -3,6 +3,7 @@ package com.example.alumfial1.ventasaplication;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -48,8 +49,13 @@ public class NavigationActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                BoletaFragment boletaFragment = new BoletaFragment();
+
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, boletaFragment)
+                                .addToBackStack(null).commit();
+
+             //   Snackbar.make(view, "Vista previa de la venta", Snackbar.LENGTH_LONG)
+               //         .setAction("Action", null).show();
             }
         });
 
@@ -129,5 +135,10 @@ public class NavigationActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public void cambiarFragment(Fragment frag){
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container,frag).commit();
     }
 }
