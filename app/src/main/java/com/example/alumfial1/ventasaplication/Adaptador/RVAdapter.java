@@ -2,6 +2,7 @@ package com.example.alumfial1.ventasaplication.Adaptador;
 
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.alumfial1.ventasaplication.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,13 +38,14 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.ProductoViewHolder
         super.onAttachedToRecyclerView(recyclerView);
     }
 
-
     //para especificar el contenido de cada elemento del RecyclerView.
     @Override
     public void onBindViewHolder(ProductoViewHolder holder, int position) {
-        holder.nombre.setText(listaProductos.get(position).get("nombre").toString());
-        holder.stock.setText(listaProductos.get(position).get("stock").toString());
-        holder.img.setImageResource((int)listaProductos.get(position).get("imagen"));
+            holder.nombre.setText(listaProductos.get(position).get("nombre").toString());
+            holder.stock.setText(listaProductos.get(position).get("stock").toString());
+            holder.img.setImageResource(R.drawable.yogurt_yaya_fresa);
+
+        //holder.nombre.setText(listaProductos (position).get("nombre").toString());
     }
 
     @Override

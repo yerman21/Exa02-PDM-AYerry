@@ -14,6 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.alumfial1.ventasaplication.view.ProductoFragment;
+import com.example.alumfial1.ventasaplication.view.VentaFragment;
+
 public class NavigationActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private VentaFragment ventaFragment;
