@@ -19,8 +19,9 @@ import com.example.alumfial1.ventasaplication.view.ProductoFragment;
 import com.example.alumfial1.ventasaplication.view.VentaFragment;
 
 public class NavigationActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , EnviarMensaje{
     private VentaFragment ventaFragment;
+    private FragmentTransaction transaction;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,26 +39,12 @@ public class NavigationActivity extends AppCompatActivity
 
 
             // Añadirmos el fragment al fragment_container(FrameLayout)
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.fragment_container,ventaFragment).commit();
+            transaction = getSupportFragmentManager().beginTransaction();
+            transaction.add(R.id.fragment_container,ventaFragment).commit();
         }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BoletaFragment boletaFragment = new BoletaFragment();
-
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, boletaFragment)
-                                .addToBackStack(null).commit();
-
-             //   Snackbar.make(view, "Vista previa de la venta", Snackbar.LENGTH_LONG)
-               //         .setAction("Action", null).show();
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -106,7 +93,7 @@ public class NavigationActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
         Bundle arg=new Bundle();
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction = getSupportFragmentManager().beginTransaction();
         switch (id){
             case R.id.nav_sale:
                 ventaFragment=new VentaFragment();
@@ -138,7 +125,13 @@ public class NavigationActivity extends AppCompatActivity
     }
 
     public void cambiarFragment(Fragment frag){
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container,frag).commit();
+        transaction.add(R.id.fragment_container,frag).commit();
+    }
+
+
+    @Override
+    public void pasarDatosEntreFragments(Fragment frag) {
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,frag)
+            .addToBackStack(null).commit();
     }
 }

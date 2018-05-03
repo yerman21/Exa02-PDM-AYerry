@@ -1,6 +1,8 @@
 package com.example.alumfial1.ventasaplication.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.alumfial1.ventasaplication.Adaptador.Venta_Adapter;
+import com.example.alumfial1.ventasaplication.BoletaFragment;
+import com.example.alumfial1.ventasaplication.EnviarMensaje;
 import com.example.alumfial1.ventasaplication.R;
 import com.example.alumfial1.ventasaplication.interfaces.VentaInterface;
 import com.example.alumfial1.ventasaplication.presentador.VentaPresentator;
@@ -31,9 +35,9 @@ import java.util.HashMap;
 
 public class VentaFragment extends Fragment implements VentaInterface.View{
     private VentaInterface.Presenter presenter;
+    private EnviarMensaje em;
     private RecyclerView rv_catalogo;
     private EditText et_cantidad;
-    private FloatingActionButton bn_floating_pre;
     private DatabaseReference mDatabase;
     private Venta_Adapter adapter;
     private ArrayList<HashMap<String,Object>> lista;
@@ -49,7 +53,7 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
         lista= new ArrayList<HashMap<String,Object>>();
         carrito=new ArrayList<HashMap<String,Object>>();
         rv_catalogo = (RecyclerView)view.findViewById(R.id.rv_venta);
-        bn_floating_pre=(FloatingActionButton)view.findViewById(R.id.fab);
+
 
         rv_catalogo.setItemAnimator(new DefaultItemAnimator());
         //Si rv_catalogo seguro que el tamaño del RecyclerView no se cambiará
@@ -59,17 +63,28 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
         // hará que tu RecyclerView parezca una ListView.
         rv_catalogo.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_venta);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                BoletaFragment boletaFragment=new BoletaFragment();
+                Bundle paquete=new Bundle();
+                paquete.putSerializable("carrito",carrito);
+                boletaFragment.setArguments(paquete);
+
+                em.pasarDatosEntreFragments(boletaFragment);
+/*                Intent intent=new Intent(getContext(),BoletaFragment.class);
+                intent
+                 Snackbar.make(view, "Vista previa de la venta", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+*/
+            }
+        });
+
         mDatabase= FirebaseDatabase.getInstance().getReference().child("producto");
 
         adapter=new Venta_Adapter(lista);
-
-        bn_floating_pre.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Pre-venta", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,6 +160,7 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
                     public void onClick(DialogInterface dialog, int id) {
                         HashMap<String,Object> elemento_agregar=new HashMap<String,Object>();
                         elemento_agregar.put("idd",idd);
+                        elemento_agregar.put("nombre",nombre);
                         elemento_agregar.put("precio",precio);
                         elemento_agregar.put("cantidad",et_cantidad.getText().toString());
 
@@ -163,5 +179,12 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    //Se llama cuando un fragmento se asocia por primera vez a su contexto
+    @Override
+    public void onAttach(Context context) {
+         super.onAttach(context);
+         em=(EnviarMensaje)context;
     }
 }

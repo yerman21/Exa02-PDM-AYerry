@@ -3,10 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Exa02-PDM-AYerry.iml" filepath="$PROJECT_DIR$/Exa02-PDM-AYerry.iml" />
-      <module fileurl="file://D:\Exa02-PDM-AYerry\Exa02-PDM-AYerry.iml" filepath="D:\Exa02-PDM-AYerry\Exa02-PDM-AYerry.iml" />
-      <module fileurl="file://D:\Exa02-PDM-AYerry\VentasAplication.iml" filepath="D:\Exa02-PDM-AYerry\VentasAplication.iml" />
+      <module fileurl="file://D:/Exa02-PDM-AYerry/Exa02-PDM-AYerry.iml" filepath="D:/Exa02-PDM-AYerry/Exa02-PDM-AYerry.iml" />
+      <module fileurl="file://D:/Exa02-PDM-AYerry/VentasAplication.iml" filepath="D:/Exa02-PDM-AYerry/VentasAplication.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:\Exa02-PDM-AYerry\app\app.iml" filepath="D:\Exa02-PDM-AYerry\app\app.iml" />
+      <module fileurl="file://D:/Exa02-PDM-AYerry/app/app.iml" filepath="D:/Exa02-PDM-AYerry/app/app.iml" />
     </modules>
   </component>
 </project>

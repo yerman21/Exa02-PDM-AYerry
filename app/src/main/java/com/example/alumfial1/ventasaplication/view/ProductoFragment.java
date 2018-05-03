@@ -3,6 +3,8 @@ package com.example.alumfial1.ventasaplication.view;
 
 import android.os.Bundle;
 
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -52,6 +54,15 @@ public class ProductoFragment extends Fragment implements ProductoInterface.View
         //voy a usar un LinearLayoutManager. Ésta subclase LayoutManager por defecto
         // hará que tu RecyclerView parezca una ListView.
         rv_producto.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab_add_producto);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Vista add producto", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         mDatabase= FirebaseDatabase.getInstance().getReference().child("producto");
         adapter=new RVAdapter(lista);

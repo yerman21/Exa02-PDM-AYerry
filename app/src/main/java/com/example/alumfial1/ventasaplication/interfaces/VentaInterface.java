@@ -14,6 +14,7 @@ public interface VentaInterface {
         void addVenta(String cliente, ArrayList<HashMap<String,HashMap<String,Object>>> productos,String vendedor);
     }
     interface Model{
+
         void addVenta(String cliente, ArrayList<HashMap<String,HashMap<String,Object>>> productos,String vendedor);
     }
 }
