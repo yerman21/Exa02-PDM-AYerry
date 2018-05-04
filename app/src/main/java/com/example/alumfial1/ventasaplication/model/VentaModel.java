@@ -31,7 +31,7 @@ public class VentaModel implements VentaInterface.Model {
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                reference.setValue("stock",((int)dataSnapshot.child("stock").getValue())-cantidad);
+                reference.child("stock").setValue(Long.parseLong(dataSnapshot.child("stock").getValue().toString())-cantidad);
                 presenter.notificar(1);
             }
             @Override
@@ -43,33 +43,26 @@ public class VentaModel implements VentaInterface.Model {
     }
 
     @Override
-    public void addVenta(String cliente, ArrayList<HashMap<String,HashMap<String,Object>>> productos,String vendedor) {
-        HashMap<String,Object> venta=new HashMap();
+    public void addVenta(String cliente, ArrayList<HashMap<String,Object>> carrito_ventas,String vendedor,String total) {
         HashMap<String,Object> productosVendidos=new HashMap();
-        Double total=0.0;
+        HashMap<String,Object> productosCarrito=new HashMap();
 
-        for (HashMap<String, HashMap<String, Object>> hash:productos) {
-               String clave=hash.keySet().toString();
-               Double subTotal= ((int)hash.get(clave).get("cantidad"))* ((Double)hash.get(clave).get("precio"));
-               total=total+subTotal;
+        String primaryKey=ventaReferences.push().getKey();
 
-               productosVendidos.put(clave,(int)hash.get(clave).get("cantidad"));
+        ventaReferences.child(primaryKey).child("cliente").setValue(cliente);
+        ventaReferences.child(primaryKey).child("igv").setValue(Double.parseDouble(total)*0.18);
+        ventaReferences.child(primaryKey).child("total").setValue(total);
+        ventaReferences.child(primaryKey).child("vendedor").setValue(vendedor);
+
+        for (HashMap<String, Object> hash:carrito_ventas) {
+            String clave_producto=hash.get("idd").toString();
+
+            hash.remove("idd");
+            hash.remove("nombre");
+
+            ventaReferences.child(primaryKey).child("producto").child(clave_producto).setValue(hash);
+            modificarStock(clave_producto,Integer.parseInt(hash.get("cantidad").toString()));
         }
-
-        venta.put("cliente",cliente);
-        venta.put("igv",total*0.18);
-        venta.put("productos",productos);
-        venta.put("total",total);
-        venta.put("vendedor",vendedor);
-        productoReferences.push().setValue(venta);
-
-        for (HashMap.Entry<String, Object> entry : productosVendidos.entrySet()){
-            String key = entry.getKey();
-            Object value = entry.getValue();
-
-            modificarStock(key,(int)value);
-        }
-
         presenter.notificar(1);
     }
 }

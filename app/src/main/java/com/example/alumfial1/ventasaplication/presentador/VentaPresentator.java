@@ -1,5 +1,6 @@
 package com.example.alumfial1.ventasaplication.presentador;
 
+import com.example.alumfial1.ventasaplication.BoletaFragment;
 import com.example.alumfial1.ventasaplication.interfaces.VentaInterface;
 import com.example.alumfial1.ventasaplication.model.VentaModel;
 import com.example.alumfial1.ventasaplication.view.VentaFragment;
@@ -10,9 +11,15 @@ import java.util.HashMap;
 
 public class VentaPresentator implements VentaInterface.Presenter {
     private VentaInterface.View view;
+
     private VentaInterface.Model model;
 
     public VentaPresentator(VentaFragment view){
+        this.view=view;
+        model=new VentaModel(this);
+    }
+
+    public VentaPresentator(BoletaFragment view){
         this.view=view;
         model=new VentaModel(this);
     }
@@ -23,7 +30,7 @@ public class VentaPresentator implements VentaInterface.Presenter {
     }
 
     @Override
-    public void addVenta(String cliente, ArrayList<HashMap<String, HashMap<String, Object>>> productos, String vendedor) {
-        model.addVenta(cliente, productos, vendedor);
+    public void addVenta(String cliente, ArrayList<HashMap<String,Object>> carrito_compras,String vendedor,String total) {
+        model.addVenta(cliente, carrito_compras, vendedor,total);
     }
 }

@@ -40,8 +40,7 @@ public class VentaFragment extends Fragment implements VentaInterface.View{
     private EditText et_cantidad;
     private DatabaseReference mDatabase;
     private Venta_Adapter adapter;
-    private ArrayList<HashMap<String,Object>> lista;
-    private ArrayList<HashMap<String,Object>> carrito;
+    private ArrayList<HashMap<String,Object>> lista,carrito;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

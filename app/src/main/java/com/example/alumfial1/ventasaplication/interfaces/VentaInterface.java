@@ -11,10 +11,10 @@ public interface VentaInterface {
     }
     interface Presenter{
         void notificar(int codigo);
-        void addVenta(String cliente, ArrayList<HashMap<String,HashMap<String,Object>>> productos,String vendedor);
+        void addVenta(String cliente, ArrayList<HashMap<String,Object>> carrito_compras,String vendedor,String total);
     }
     interface Model{
 
-        void addVenta(String cliente, ArrayList<HashMap<String,HashMap<String,Object>>> productos,String vendedor);
+        void addVenta(String cliente, ArrayList<HashMap<String,Object>> carrito_compras,String vendedor,String total);
     }
 }

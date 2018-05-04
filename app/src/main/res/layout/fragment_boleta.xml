@@ -23,7 +23,7 @@
                 android:padding="4dp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:text="Cantidad" />
+                android:text="Cant." />
 
             <TextView
                 android:layout_width="match_parent"
@@ -93,10 +93,18 @@
             android:id="@+id/tv_boleta_total"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
+            android:textAlignment="textEnd"
             android:layout_gravity="bottom|end"
             android:padding="4dp"
             android:text="Total"/>
 
     </TableLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_add_venta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@drawable/ic_money" />
 </FrameLayout>
