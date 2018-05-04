@@ -2,12 +2,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:layout_margin="10dp"
     tools:context="com.example.alumfial1.ventasaplication.BoletaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
 
+    <TableLayout
+        android:id="@+id/tl_tabla"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="1">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Cantidad" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Producto" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Precio" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="Sub-Total" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <TextView
+                android:id="@+id/tv_boleta_cantidad"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:text="Cantidad" />
+
+            <TextView
+                android:id="@+id/tv_boleta_producto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:text="Producto" />
+
+            <TextView
+                android:id="@+id/tv_boleta_precio"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:text="Precio" />
+
+            <TextView
+                android:id="@+id/tv_boleta_subtotal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="4dp"
+                android:gravity="center"
+                android:text="Sub-Total" />
+
+        </TableRow>
+
+        <TextView
+            android:id="@+id/tv_boleta_total"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="viewEnd"
+            android:layout_gravity="bottom|end"
+            android:padding="4dp"
+            android:text="Total"/>
+
+    </TableLayout>
 </FrameLayout>
